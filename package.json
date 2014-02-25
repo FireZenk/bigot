@@ -1,0 +1,42 @@
+{
+  "name": "bigot",
+  "version": "0.0.1",
+  "author": "FireZenk <firezenk@gmail.com>",
+  "description": "A little moustache template engine",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/FireZenk/bigot"
+  },
+  "engines": {
+    "node": "0.10.x",
+    "npm": "1.2.x"
+  },
+  "main": "index.js",
+  "dependencies": {
+    "underscore": "~1.6.0"
+  },
+  "devDependencies": {
+    "grunt": "~0.4.1",
+    "grunt-contrib-jshint": "~0.6.3",
+    "grunt-contrib-nodeunit": "~0.2.0",
+    "grunt-contrib-uglify": "~0.2.5",
+    "grunt-contrib-coffee": "~0.7.0"
+  },
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/FireZenk/bigot/issues"
+  },
+  "homepage": "https://github.com/FireZenk/bigot",
+  "directories": {
+    "test": "test"
+  },
+  "scripts": {
+    "test": "node test/test.js"
+  },
+  "keywords": [
+    "bigot",
+    "template",
+    "engine",
+    "mousthache"
+  ]
+}
