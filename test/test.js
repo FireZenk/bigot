@@ -5,7 +5,7 @@ var source, data;
  * TEST ONE
  */
 
-source = "<h1>{title}</h1><h6>{subtitle}</h6><p>{content}</p><p>2 + 3 = {func}</p>";
+source = "<h1>{title}</h1>\n\t<h6>{subtitle}</h6>\n\t<p>{content}</p>\n\t<p>2 + 3 = {func}</p>";
 
 data = {title: "Hello World!", subtitle: "and hello Bigot!", 
 			content: "This is a Bigot test template", func: function() {return 2+3}};
@@ -46,3 +46,22 @@ data = {people: [{name: "Abby", age: "24", sports: ["hockey","curling"]},
 				]};
 
 console.log("TEST4: Here is the rendered source:\n"+bigot.render(source, data));
+
+/*
+ * TEST FIVE
+ */
+
+source = "\t<ul>\n{¡people}\t\t<li>{name}, {age} {¡activities}<span>{sport} and {hobby}</span>{!activities}</li>\n{!people}\t</ul>";
+
+data = {people: [{name: "Abby", age: "24", activities: [{
+											sport: "hockey",
+											hobby: "drive"}] },
+				 {name: "Matt", age: "32", activities: [{
+											sport: "football",
+											hobby: "pets"}] },
+				 {name: "John", age: "18", activities: [{
+											sport: "tennis",
+											hobby: "videogames"}] }
+				]};
+
+console.log("TEST5: Here is the rendered source:\n"+bigot.render(source, data));
