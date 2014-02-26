@@ -1,7 +1,8 @@
+[![Build Status](https://travis-ci.org/FireZenk/bigot.png?branch=master)](https://travis-ci.org/FireZenk/bigot)
+
 Bigot
 ======
 A little _moustache like_ template engine
-
 
 How to install
 ------
