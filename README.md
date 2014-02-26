@@ -8,6 +8,11 @@ How to install
 ```
 npm install bigot
 ```
+or
+
+```
+bower install bigot
+```
 
 How to use
 ------

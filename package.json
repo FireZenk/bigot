@@ -2,7 +2,7 @@
   "name": "bigot",
   "version": "0.2.0",
   "author": "FireZenk <firezenk@gmail.com>",
-  "description": "A little moustache template engine",
+  "description": "A little 'moustache like' template engine",
   "repository": {
     "type": "git",
     "url": "https://github.com/FireZenk/bigot"

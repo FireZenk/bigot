@@ -1,0 +1,24 @@
+{
+  "name": "project_bigot",
+  "version": "0.2.0",
+  "homepage": "https://github.com/FireZenk/bigot",
+  "authors": [
+    "FireZenk <firezenk@gmail.com>"
+  ],
+  "description": "A little 'moustache like' template engine",
+  "main": "lib/index.js",
+  "keywords": [
+    "bigot",
+    "template",
+    "engine",
+    "moustache"
+  ],
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ]
+}
