@@ -2,7 +2,7 @@
 
 Bigot
 ======
-A little _moustache like_ template engine
+A little _moustache like_ template engine but more semantic
 
 How to install
 ------
