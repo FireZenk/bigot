@@ -1,11 +1,11 @@
 {
   "name": "project_bigot",
-  "version": "0.2.0",
+  "version": "0.3.0",
   "homepage": "https://github.com/FireZenk/bigot",
   "authors": [
     "FireZenk <firezenk@gmail.com>"
   ],
-  "description": "A little 'moustache like' template engine",
+  "description": "A little 'moustache like' template engine but more semantic",
   "main": "lib/index.js",
   "keywords": [
     "bigot",

@@ -7,16 +7,28 @@ A little _moustache like_ template engine
 How to install
 ------
 ```
-npm install bigot
+npm install bigot --save
 ```
 or
 
 ```
 bower install bigot
 ```
+or as a Grunt plugin
+
+```
+npm install grunt-contrib-bigot --save-dev
+```
 
 How to use
 ------
+######Reserved keywords:
+In order to be an engine of more semantic templates, Bigot use certain words to describe his actions, which shall therefore be reserved and may not be used as names or properties of objects/arrays.
+
+This is the list of reserved keywords:
+* loop
+* end
+* @
 
 ######Render objects:
 ```
@@ -32,7 +44,7 @@ console.log(bigot.render(source, data));
 
 ######Render arrays:
 ```
-source = "<ul>{¡names}<li>{@}</li>{!names}</ul>";
+source = "<ul>{loop names}<li>{@}</li>{end names}</ul>";
 
 data = {names: ["Abby","Matt","Jhon"]};
 
@@ -42,7 +54,7 @@ console.log(bigot.render(source, data));
 
 ######Render array of objects:
 ```
-source = "<ul>{¡people}<li>{name}, {age}</li>{!people}</ul>";
+source = "<ul>{loop people}<li>{name}, {age}</li>{end people}</ul>";
 
 data = {people: [{name: "Abby", age: "24"},
 				{name: "Matt", age: "32"},
@@ -54,7 +66,7 @@ console.log(bigot.render(source, data));
 
 ######Render arrays into array of objects:
 ```
-source = "<ul>{¡people}<li>{name}, {age} {¡sports}<span>{@}</span>{!sports}</li>{!people}</ul>";
+source = "<ul>{loop people}<li>{name}, {age} {loop sports}<span>{@}</span>{end sports}</li>{end people}</ul>";
 
 data = {people: [{name: "Abby", age: "24", sports: ["hockey","curling"]},
 				 {name: "Matt", age: "32", sports: ["futbol"]},
@@ -67,7 +79,7 @@ console.log(bigot.render(source, data));
 
 ######Render object arrays into array of objects:
 ```
-source = "<ul>{¡people}<li>{name}, {age} {¡activities}<span>{sport} and {hobby}</span>{!activities}</li>{!people}</ul>";
+source = "<ul>{loop people}<li>{name}, {age} {loop activities}<span>{sport} and {hobby}</span>{end activities}</li>{end people}</ul>";
 
 data = {people: [{name: "Abby", age: "24", activities: [{
 											sport: "hockey",

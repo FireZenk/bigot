@@ -5,10 +5,10 @@ exports.render = (source, data) ->
 	func = (source, data) ->
 		_.each data, (value, key) ->
 			if _.isArray value
-				startPoint = source.indexOf "{¡#{key}}"
+				startPoint = source.indexOf "{loop #{key}}"
 				if startPoint != undefined
-					startPoint2 = 3 + startPoint + "#{key}".length
-					endPoint = source.indexOf "{!#{key}}"
+					startPoint2 = 7 + startPoint + "#{key}".length
+					endPoint = source.indexOf "{end #{key}}"
 					partial = source.slice startPoint2, endPoint
 					partialLoop = ""
 					_.each value, (value2, key2) ->
@@ -16,8 +16,8 @@ exports.render = (source, data) ->
 							partialLoopInner = partial
 							_.each value2, (value3, key3, list) ->
 								if _.isArray value3
-									startPointInner = partialLoopInner.indexOf "{¡#{key3}}"
-									endPointInner = 3 + (partialLoopInner.indexOf "{!#{key3}}") + "#{key3}".length
+									startPointInner = partialLoopInner.indexOf "{loop #{key3}}"
+									endPointInner = 6 + (partialLoopInner.indexOf "{end #{key3}}") + "#{key3}".length
 									innerArray = func partialLoopInner.slice(startPointInner,endPointInner), value2
 									partialLoopInner = 
 										partialLoopInner.slice(0, startPointInner) + innerArray + partialLoopInner.slice(endPointInner, partial.length)
@@ -28,7 +28,7 @@ exports.render = (source, data) ->
 							partialLoop = partialLoop + partial.replace "{@}", value2
 					sourceEnd = source.slice endPoint, source.length
 					sourceIni = source.slice 0, startPoint
-					return source = sourceIni + partialLoop + sourceEnd.replace "{!#{key}}", ""
+					return source = sourceIni + partialLoop + sourceEnd.replace "{end #{key}}", ""
 			else
 				return source = source.replace "{#{key}}", value
 		return source
