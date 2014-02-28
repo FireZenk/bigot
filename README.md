@@ -1,4 +1,4 @@
-[![Build Status](https://travis-ci.org/FireZenk/bigot.png?branch=master)](https://travis-ci.org/FireZenk/bigot)
+[![NPM version](https://badge.fury.io/js/bigot.png)](http://badge.fury.io/js/bigot) [![Bower version](https://badge.fury.io/bo/bigot.png)](http://badge.fury.io/bo/bigot) [![GitHub version](https://badge.fury.io/gh/FireZenk%2Fbigot.png)](http://badge.fury.io/gh/FireZenk%2Fbigot) [![Build Status](https://travis-ci.org/FireZenk/bigot.png?branch=master)](https://travis-ci.org/FireZenk/bigot)
 
 Bigot
 ======
