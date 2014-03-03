@@ -1,6 +1,6 @@
 {
   "name": "bigot",
-  "version": "0.3.0",
+  "version": "0.4.0",
   "author": "FireZenk <firezenk@gmail.com>",
   "description": "A little 'moustache like' template engine but more semantic",
   "repository": {
@@ -16,7 +16,8 @@
     "grunt-contrib-jshint": "~0.6.3",
     "grunt-contrib-nodeunit": "~0.2.0",
     "grunt-contrib-uglify": "~0.2.5",
-    "grunt-contrib-coffee": "~0.7.0"
+    "grunt-contrib-coffee": "~0.7.0",
+    "nodeunit": "~0.8.6"
   },
   "license": "MIT",
   "bugs": {
@@ -27,7 +28,7 @@
     "test": "test"
   },
   "scripts": {
-    "test": "node test/test.js"
+    "test": "nodeunit test"
   },
   "keywords": [
     "bigot",

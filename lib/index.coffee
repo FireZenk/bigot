@@ -1,12 +1,16 @@
 _ = require 'underscore'
+fs = require 'fs'
 
 exports.render = (source, data) ->
 
 	func = (source, data) ->
 		_.each data, (value, key) ->
+			if (source.indexOf "{include #{key}}") isnt -1
+				readed = fs.readFileSync value, "utf-8"
+				return source = source.replace "{include #{key}}", readed
 			if _.isArray value
 				startPoint = source.indexOf "{loop #{key}}"
-				if startPoint != undefined
+				if startPoint isnt undefined
 					startPoint2 = 7 + startPoint + "#{key}".length
 					endPoint = source.indexOf "{end #{key}}"
 					partial = source.slice startPoint2, endPoint
@@ -19,7 +23,7 @@ exports.render = (source, data) ->
 									startPointInner = partialLoopInner.indexOf "{loop #{key3}}"
 									endPointInner = 6 + (partialLoopInner.indexOf "{end #{key3}}") + "#{key3}".length
 									innerArray = func partialLoopInner.slice(startPointInner,endPointInner), value2
-									partialLoopInner = 
+									partialLoopInner =
 										partialLoopInner.slice(0, startPointInner) + innerArray + partialLoopInner.slice(endPointInner, partial.length)
 								else
 									partialLoopInner = partialLoopInner.replace "{#{key3}}", value3
@@ -32,5 +36,5 @@ exports.render = (source, data) ->
 			else
 				return source = source.replace "{#{key}}", value
 		return source
-		
+
 	return func source, data

@@ -26,6 +26,7 @@ How to use
 In order to be an engine of more semantic templates, Bigot use certain words to describe his actions, which shall therefore be reserved and may not be used as names or properties of objects/arrays.
 
 This is the list of reserved keywords:
+* include
 * loop
 * end
 * @
@@ -34,13 +35,25 @@ This is the list of reserved keywords:
 ```
 source = "<h1>{title}</h1><h6>{subtitle}</h6><p>{content}</p><p>2 + 3 = {func}</p>";
 
-data = {title: "Hello World!", subtitle: "and hello Bigot!", 
+data = {title: "Hello World!", subtitle: "and hello Bigot!",
 			content: "This is a Bigot test template", func: function() {return 2+3}};
 
 console.log(bigot.render(source, data));
 
 ```
 >output: `<h1>Hello World!</h1><h6>and hello Bigot!</h6><p>This is a Bigot test template</p><p>2 + 3 = 5</p>`
+
+######Render including templates:
+```
+source = "{include header}<h1>{title}</h1><h6>{subtitle}</h6><p>{content}</p><p>2 + 3 = {func}</p>{include footer}";
+
+data = {header: "./test/header.html", footer: "./test/footer.html", title: "Hello World!",
+	subtitle: "and hello Bigot!", content: "This is a Bigot test template", func: function() {return 2 + 3;}};
+
+console.log(bigot.render(source, data));
+
+```
+>output: `<html><head><title>Bigot test</title></head><body><h1>Hello World!</h1><h6>and hello Bigot!</h6><p>This is a Bigot test template</p><p>2 + 3 = 5</p></body></html>`
 
 ######Render arrays:
 ```
@@ -95,6 +108,12 @@ data = {people: [{name: "Abby", age: "24", activities: [{
 console.log(bigot.render(source, data));
 ```
 >output: `<ul> <li>Abby, 24 <span>hockey and drive</span></li> <li>Matt, 32 <span>football and pets</span></li> <li>John, 18 <span>tennis and videogames</span></li> </ul>`
+
+######More samples? See test/test.js
+
+Test
+------
+`nodeunit test`
 
 Author
 ------

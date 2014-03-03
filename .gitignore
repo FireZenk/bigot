@@ -2,4 +2,3 @@
 .DS_Store
 *.log
 node_modules
-complexity-report.xml
