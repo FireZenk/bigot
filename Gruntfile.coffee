@@ -2,16 +2,18 @@ module.exports = (grunt) ->
 
 	# Project configuration.
 	grunt.initConfig
+
 		pkg:
 			grunt.file.readJSON 'package.json'
+		
 		coffee:
 			compile:
 				files:
 					'./lib/index.js': './lib/index.coffee'
-					'./test/test.js': './test/test.coffee'
+
 		uglify:
-    		target:
-      			files:
+        	target:
+        		files:
         			'./lib/index.js': './lib/index.js'
 
 	# Load the plugins

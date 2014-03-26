@@ -75,3 +75,46 @@ exports.BigotTest =
 
     test.equal result,"<html><head><title>Bigot test</title></head><body>\n<h1>Hello World!</h1><h6>and hello Bigot!</h6><p>This is a Bigot test template</p><p>2 + 3 = 5</p></body></html>\n"
     do test.done
+
+  'Test 7 - Render conditionals': (test) ->
+    source = "<h1>{title}</h1><h6>{subtitle}</h6>{if bool_func}<p>{content}</p>{else}<p>{content2}</p>{end bool_func}<p>2 + 3 = {func}</p>"
+
+    data = 
+      title: "Hello World!", 
+      subtitle: "and hello Bigot!"
+      bool_func: () -> true 
+      content: "This is a Bigot test template with conditionals"
+      content2: "This is a Bigot test template"
+      func: () -> 2+3
+
+    result = Bigot.render source, data
+
+    test.equal result,"<h1>Hello World!</h1><h6>and hello Bigot!</h6><p>This is a Bigot test template with conditionals</p><p>2 + 3 = 5</p>"
+    do test.done
+
+  'Test 8 - Render nested conditionals': (test) ->
+    source = "{if showMe}<p>Hello {if canShow}<span>friend!</span>{else}<span>{name}!</span>{end canShow}</p>{else}<p>Bye!</p>{end showMe}"
+
+    data = 
+      name: "Lightning McQueen"
+      showMe: () -> true
+      canShow: () -> false
+
+    result = Bigot.render source, data
+
+    test.equal result,"<p>Hello <span>Lightning McQueen!</span></p>"
+    do test.done
+
+  'Test 9 - Render nested conditionals with one loop inside': (test) ->
+    source = "{if showMe}<p>Hello {if canShow}<span>friend!</span>{else}<span>{name}!</span><ul>{loop animals}<li>{@}</li>{end animals}</ul>{end canShow}</p>{else}<p>Bye!</p>{end showMe}"
+
+    data = 
+      name: "Lightning McQueen"
+      showMe: () -> true
+      canShow: () -> false
+      animals: ["Lion","Tiger","Panther"]
+
+    result = Bigot.render source, data
+
+    test.equal result,"<p>Hello <span>Lightning McQueen!</span><ul><li>Lion</li><li>Tiger</li><li>Panther</li></ul></p>"
+    do test.done
