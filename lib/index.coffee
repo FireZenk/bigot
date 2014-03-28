@@ -7,8 +7,12 @@ exports.render = (source, data) ->
 
 	_isObject = (obj) -> obj is Object obj
 
+	_expressionComment = new RegExp "{comment [^}]+}","g"
+
 	func = (source, data) ->
 		_.each data, (value, key) ->
+			if _expressionComment.test source
+				source = source.replace _expressionComment, ""
 			if (source.indexOf "{include #{key}}") isnt -1
 				readed = fs.readFileSync value, "utf-8"
 				return source = source.replace "{include #{key}}", readed

@@ -29,6 +29,7 @@ In order to be an engine of more semantic templates, Bigot use certain words to 
 
 This is the list of reserved keywords:
 * include
+* comment
 * if
 * else
 * loop
@@ -131,6 +132,16 @@ data = {name: "Lightning McQueen",
 console.log(Bigot.render(source, data));
 ```
 >output: `<p>Hello <span>Lightning McQueen!</span></p>`
+
+######Comments with Bigot:
+```
+source = "{comment Start of file}<h1>{title}</h1><h6>{subtitle}</h6>{comment Middle of file}<p>{content}</p><p>2 + 3 = {func}</p>{comment End of file}"
+
+data = {title: "Hello World!", subtitle: "and hello Bigot!", content: "This is a Bigot test template", func: function() {return 2 + 3;}}
+      
+console.log(Bigot.render(source, data));
+```
+>output: `<h1>Hello World!</h1><h6>and hello Bigot!</h6><p>This is a Bigot test template</p><p>2 + 3 = 5</p>`
 
 ######More samples? See test/test.coffee
 

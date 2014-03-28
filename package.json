@@ -1,6 +1,6 @@
 {
   "name": "bigot",
-  "version": "0.5.0",
+  "version": "0.6.0",
   "author": "FireZenk <firezenk@gmail.com>",
   "description": "A little 'moustache like' template engine but more semantic",
   "repository": {
@@ -28,7 +28,7 @@
     "test": "test"
   },
   "scripts": {
-    "test": "nodeunit test"
+    "test": "nodeunit test/test.js"
   },
   "keywords": [
     "bigot",

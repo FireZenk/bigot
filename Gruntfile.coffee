@@ -10,6 +10,7 @@ module.exports = (grunt) ->
 			compile:
 				files:
 					'./lib/index.js': './lib/index.coffee'
+					'./test/test.js': './test/test.coffee'
 
 		uglify:
         	target:

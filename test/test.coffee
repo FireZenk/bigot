@@ -2,7 +2,7 @@ Bigot = require("./../lib/index.js");
 
 exports.BigotTest =
 
-  'Test 1 - Render arrays': (test) ->
+  'Test 1 - Render objects': (test) ->
     source = "<h1>{title}</h1><h6>{subtitle}</h6><p>{content}</p><p>2 + 3 = {func}</p>"
 
     data = title: "Hello World!", subtitle: "and hello Bigot!", content: "This is a Bigot test template", func: () -> 2+3
@@ -117,4 +117,14 @@ exports.BigotTest =
     result = Bigot.render source, data
 
     test.equal result,"<p>Hello <span>Lightning McQueen!</span><ul><li>Lion</li><li>Tiger</li><li>Panther</li></ul></p>"
+    do test.done
+
+  'Test 10 - Render commented code': (test) ->
+    source = "{comment Start of file}<h1>{title}</h1><h6>{subtitle}</h6>{comment Middle of file}<p>{content}</p><p>2 + 3 = {func}</p>{comment End of file}"
+
+    data = title: "Hello World!", subtitle: "and hello Bigot!", content: "This is a Bigot test template", func: () -> 2+3
+
+    result = Bigot.render source, data
+
+    test.equal result,"<h1>Hello World!</h1><h6>and hello Bigot!</h6><p>This is a Bigot test template</p><p>2 + 3 = 5</p>"
     do test.done
