@@ -16,6 +16,12 @@ exports.render = (source, data) ->
 			if (source.indexOf "{include #{key}}") isnt -1
 				readed = fs.readFileSync value, "utf-8"
 				return source = source.replace "{include #{key}}", readed
+			if (source.indexOf "{#{key} ") isnt -1
+				startPoint = source.indexOf "{#{key} "
+				sliceStart = source.substring startPoint, source.length
+				endPoint = sliceStart.indexOf "}"
+				sliceEnd = sliceStart.substring "{#{key} ".length, endPoint
+				return source = source.replace "{#{key} #{sliceEnd}}", value.call data["#{sliceEnd}"]
 			if (source.indexOf "{if #{key}}") isnt -1
 				if value.call()
 					source = source.replace "{if #{key}}", ""

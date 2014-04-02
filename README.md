@@ -2,7 +2,8 @@
 
 Bigot
 ======
-A little _moustache like_ template engine but more semantic
+A little _moustache inspired_ template engine but more semantic.
+Bigot is easy to learn, read and write.
 
 How to install
 ------
@@ -123,11 +124,11 @@ console.log(Bigot.render(source, data));
 
 ######Render conditionals:
 ```
-source = "{if showMe}<p>Hello {if canShow}<span>friend!</span>{else}<span>{name}!</span>{end canShow}</p>{else}<p>Bye!</p>{end showMe}"
+source = "{if showMe}<p>Hello {if canShow}<span>friend!</span>{else}<span>{name}!</span>{end canShow}</p>{else}<p>Bye!</p>{end showMe}";
 
 data = {name: "Lightning McQueen",
       	showMe: function() {return true},
-      	canShow: function() {return false}}
+      	canShow: function() {return false}};
       
 console.log(Bigot.render(source, data));
 ```
@@ -135,13 +136,35 @@ console.log(Bigot.render(source, data));
 
 ######Comments with Bigot:
 ```
-source = "{comment Start of file}<h1>{title}</h1><h6>{subtitle}</h6>{comment Middle of file}<p>{content}</p><p>2 + 3 = {func}</p>{comment End of file}"
+source = "{comment Start of file}<h1>{title}</h1><h6>{subtitle}</h6>{comment Middle of file}<p>{content}</p><p>2 + 3 = {func}</p>{comment End of file}";
 
 data = {title: "Hello World!", subtitle: "and hello Bigot!", content: "This is a Bigot test template", func: function() {return 2 + 3;}}
       
 console.log(Bigot.render(source, data));
 ```
 >output: `<h1>Hello World!</h1><h6>and hello Bigot!</h6><p>This is a Bigot test template</p><p>2 + 3 = 5</p>`
+
+######Helpers with Bigot:
+```
+source = "<h1>{toUpper title}</h1><h6>{toLower subtitle}</h6>";
+
+data = {
+      title: "Hello World!",
+      subtitle: "and hello Bigot!",
+      toUpper: function(text) {
+        text = JSON.stringify(this);
+        text = text.substring(1, text.length-1);
+        return text.toUpperCase();
+      },
+      toLower: function(text) {
+        text = JSON.stringify(this);
+        text = text.substring(1, text.length-1);
+        return text.toLowerCase();
+      }  };      
+      
+console.log(Bigot.render(source, data));
+```
+>output: `<h1>HELLO WORLD!</h1><h6>and hello bigot!</h6>`
 
 ######More samples? See test/test.coffee
 

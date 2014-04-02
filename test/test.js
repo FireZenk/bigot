@@ -4,7 +4,7 @@
   Bigot = require("./../lib/index.js");
 
   exports.BigotTest = {
-    'Test 1 - Render objects': function(test) {
+    'Test 01 - Render objects': function(test) {
       var data, result, source;
       source = "<h1>{title}</h1><h6>{subtitle}</h6><p>{content}</p><p>2 + 3 = {func}</p>";
       data = {
@@ -19,7 +19,7 @@
       test.equal(result, "<h1>Hello World!</h1><h6>and hello Bigot!</h6><p>This is a Bigot test template</p><p>2 + 3 = 5</p>");
       return test.done();
     },
-    'Test 2 - Render array of objects': function(test) {
+    'Test 02 - Render array of objects': function(test) {
       var data, result, source;
       source = "<ul>{loop names}<li>{@}</li>{end names}</ul>";
       data = {
@@ -29,7 +29,7 @@
       test.equal(result, "<ul><li>Abby</li><li>Matt</li><li>Jhon</li></ul>");
       return test.done();
     },
-    'Test 3 - Render objects into array of objects': function(test) {
+    'Test 03 - Render objects into array of objects': function(test) {
       var data, result, source;
       source = "<ul>{loop people}<li>{name}, {age}</li>{end people}</ul>";
       data = {
@@ -50,7 +50,7 @@
       test.equal(result, "<ul><li>Abby, 24</li><li>Matt, 32</li><li>John, 18</li></ul>");
       return test.done();
     },
-    'Test 4 - Render arrays into array of objects': function(test) {
+    'Test 04 - Render arrays into array of objects': function(test) {
       var data, result, source;
       source = "<ul>{loop people}<li>{name}, {age} {loop sports}<span>{@}</span>{end sports}</li>{end people}</ul>";
       data = {
@@ -74,7 +74,7 @@
       test.equal(result, "<ul><li>Abby, 24 <span>hockey</span><span>curling</span></li><li>Matt, 32 <span>futbol</span></li><li>John, 18 <span>tennis</span><span>basketball</span></li></ul>");
       return test.done();
     },
-    'Test 5 - Render object arrays into array of objects': function(test) {
+    'Test 05 - Render object arrays into array of objects': function(test) {
       var data, result, source;
       source = "<ul>{loop people}<li>{name}, {age} {loop activities}<span>{sport} and {hobby}</span>{end activities}</li>{end people}</ul>";
       data = {
@@ -113,7 +113,7 @@
       test.equal(result, "<ul><li>Abby, 24 <span>hockey and drive</span></li><li>Matt, 32 <span>football and pets</span></li><li>John, 18 <span>tennis and videogames</span></li></ul>");
       return test.done();
     },
-    'Test 6 - Render including templates': function(test) {
+    'Test 06 - Render including templates': function(test) {
       var data, result, source;
       source = "{include header}<h1>{title}</h1><h6>{subtitle}</h6><p>{content}</p><p>2 + 3 = {func}</p>{include footer}";
       data = {
@@ -130,7 +130,7 @@
       test.equal(result, "<html><head><title>Bigot test</title></head><body>\n<h1>Hello World!</h1><h6>and hello Bigot!</h6><p>This is a Bigot test template</p><p>2 + 3 = 5</p></body></html>\n");
       return test.done();
     },
-    'Test 7 - Render conditionals': function(test) {
+    'Test 07 - Render conditionals': function(test) {
       var data, result, source;
       source = "<h1>{title}</h1><h6>{subtitle}</h6>{if bool_func}<p>{content}</p>{else}<p>{content2}</p>{end bool_func}<p>2 + 3 = {func}</p>";
       data = {
@@ -149,7 +149,7 @@
       test.equal(result, "<h1>Hello World!</h1><h6>and hello Bigot!</h6><p>This is a Bigot test template with conditionals</p><p>2 + 3 = 5</p>");
       return test.done();
     },
-    'Test 8 - Render nested conditionals': function(test) {
+    'Test 08 - Render nested conditionals': function(test) {
       var data, result, source;
       source = "{if showMe}<p>Hello {if canShow}<span>friend!</span>{else}<span>{name}!</span>{end canShow}</p>{else}<p>Bye!</p>{end showMe}";
       data = {
@@ -165,7 +165,7 @@
       test.equal(result, "<p>Hello <span>Lightning McQueen!</span></p>");
       return test.done();
     },
-    'Test 9 - Render nested conditionals with one loop inside': function(test) {
+    'Test 09 - Render nested conditionals with one loop inside': function(test) {
       var data, result, source;
       source = "{if showMe}<p>Hello {if canShow}<span>friend!</span>{else}<span>{name}!</span><ul>{loop animals}<li>{@}</li>{end animals}</ul>{end canShow}</p>{else}<p>Bye!</p>{end showMe}";
       data = {
@@ -195,6 +195,27 @@
       };
       result = Bigot.render(source, data);
       test.equal(result, "<h1>Hello World!</h1><h6>and hello Bigot!</h6><p>This is a Bigot test template</p><p>2 + 3 = 5</p>");
+      return test.done();
+    },
+    'Test 11 - Render code with helpers': function(test) {
+      var data, result, source;
+      source = "<h1>{toUpper title}</h1><h6>{toLower subtitle}</h6>";
+      data = {
+        title: "Hello World!",
+        subtitle: "and hello Bigot!",
+        toUpper: function(text) {
+          text = JSON.stringify(this);
+          text = text.substring(1, text.length - 1);
+          return text.toUpperCase();
+        },
+        toLower: function(text) {
+          text = JSON.stringify(this);
+          text = text.substring(1, text.length - 1);
+          return text.toLowerCase();
+        }
+      };
+      result = Bigot.render(source, data);
+      test.equal(result, "<h1>HELLO WORLD!</h1><h6>and hello bigot!</h6>");
       return test.done();
     }
   };
