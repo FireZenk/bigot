@@ -57,8 +57,8 @@ Bigot is easy to learn, read and write.</p>
 <h2>
 <a name="how-to-use" class="anchor" href="#how-to-use"><span class="octicon octicon-link"></span></a>How to use</h2>
 
-<h6>
-<a name="reserved-keywords" class="anchor" href="#reserved-keywords"><span class="octicon octicon-link"></span></a>Reserved keywords:</h6>
+<h4>
+<a name="reserved-keywords" class="anchor" href="#reserved-keywords"><span class="octicon octicon-link"></span></a>Reserved keywords:</h4>
 
 <p>In order to be an engine of more semantic templates, Bigot use certain words to describe his actions, which shall therefore be reserved and may not be used as names or properties of objects/arrays.</p>
 
@@ -78,8 +78,8 @@ Bigot is easy to learn, read and write.</p>
 <pre><code>Bigot = require("node_modules/bigot/lib/index.js");
 </code></pre>
 
-<hr><h6>
-<a name="render-objects" class="anchor" href="#render-objects"><span class="octicon octicon-link"></span></a>Render objects:</h6>
+<hr><h4>
+<a name="render-objects" class="anchor" href="#render-objects"><span class="octicon octicon-link"></span></a>Render objects:</h4>
 
 <pre><code>source = "&lt;h1&gt;{title}&lt;/h1&gt;&lt;h6&gt;{subtitle}&lt;/h6&gt;&lt;p&gt;{content}&lt;/p&gt;&lt;p&gt;2 + 3 = {func}&lt;/p&gt;";
 
@@ -94,8 +94,8 @@ console.log(Bigot.render(source, data));
 <p>output: <code>&lt;h1&gt;Hello World!&lt;/h1&gt;&lt;h6&gt;and hello Bigot!&lt;/h6&gt;&lt;p&gt;This is a Bigot test template&lt;/p&gt;&lt;p&gt;2 + 3 = 5&lt;/p&gt;</code></p>
 </blockquote>
 
-<h6>
-<a name="render-including-templates" class="anchor" href="#render-including-templates"><span class="octicon octicon-link"></span></a>Render including templates:</h6>
+<h4>
+<a name="render-including-templates" class="anchor" href="#render-including-templates"><span class="octicon octicon-link"></span></a>Render including templates:</h4>
 
 <pre><code>source = "{include header}&lt;h1&gt;{title}&lt;/h1&gt;&lt;h6&gt;{subtitle}&lt;/h6&gt;&lt;p&gt;{content}&lt;/p&gt;&lt;p&gt;2 + 3 = {func}&lt;/p&gt;{include footer}";
 
@@ -110,8 +110,8 @@ console.log(Bigot.render(source, data));
 <p>output: <code>&lt;html&gt;&lt;head&gt;&lt;title&gt;Bigot test&lt;/title&gt;&lt;/head&gt;&lt;body&gt;&lt;h1&gt;Hello World!&lt;/h1&gt;&lt;h6&gt;and hello Bigot!&lt;/h6&gt;&lt;p&gt;This is a Bigot test template&lt;/p&gt;&lt;p&gt;2 + 3 = 5&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</code></p>
 </blockquote>
 
-<h6>
-<a name="render-arrays" class="anchor" href="#render-arrays"><span class="octicon octicon-link"></span></a>Render arrays:</h6>
+<h4>
+<a name="render-arrays" class="anchor" href="#render-arrays"><span class="octicon octicon-link"></span></a>Render arrays:</h4>
 
 <pre><code>source = "&lt;ul&gt;{loop names}&lt;li&gt;{@}&lt;/li&gt;{end names}&lt;/ul&gt;";
 
@@ -124,8 +124,8 @@ console.log(Bigot.render(source, data));
 <p>output: <code>&lt;ul&gt; &lt;li&gt;Abby&lt;/li&gt; &lt;li&gt;Matt&lt;/li&gt; &lt;li&gt;Jhon&lt;/li&gt; &lt;/ul&gt;</code></p>
 </blockquote>
 
-<h6>
-<a name="render-array-of-objects" class="anchor" href="#render-array-of-objects"><span class="octicon octicon-link"></span></a>Render array of objects:</h6>
+<h4>
+<a name="render-array-of-objects" class="anchor" href="#render-array-of-objects"><span class="octicon octicon-link"></span></a>Render array of objects:</h4>
 
 <pre><code>source = "&lt;ul&gt;{loop people}&lt;li&gt;{name}, {age}&lt;/li&gt;{end people}&lt;/ul&gt;";
 
@@ -140,8 +140,8 @@ console.log(Bigot.render(source, data));
 <p>output: <code>&lt;ul&gt; &lt;li&gt;Abby, 24&lt;/li&gt; &lt;li&gt;Matt, 32&lt;/li&gt; &lt;li&gt;John, 18&lt;/li&gt; &lt;/ul&gt;</code></p>
 </blockquote>
 
-<h6>
-<a name="render-arrays-into-array-of-objects" class="anchor" href="#render-arrays-into-array-of-objects"><span class="octicon octicon-link"></span></a>Render arrays into array of objects:</h6>
+<h4>
+<a name="render-arrays-into-array-of-objects" class="anchor" href="#render-arrays-into-array-of-objects"><span class="octicon octicon-link"></span></a>Render arrays into array of objects:</h4>
 
 <pre><code>source = "&lt;ul&gt;{loop people}&lt;li&gt;{name}, {age} {loop sports}&lt;span&gt;{@}&lt;/span&gt;{end sports}&lt;/li&gt;{end people}&lt;/ul&gt;";
 
@@ -157,8 +157,8 @@ console.log(Bigot.render(source, data));
 <p>output: <code>&lt;ul&gt; &lt;li&gt;Abby, 24 &lt;span&gt;hockey&lt;/span&gt;&lt;span&gt;curling&lt;/span&gt;&lt;/li&gt; &lt;li&gt;Matt, 32 &lt;span&gt;futbol&lt;/span&gt;&lt;/li&gt; &lt;li&gt;John, 18 &lt;span&gt;tennis&lt;/span&gt;&lt;span&gt;basketball&lt;/span&gt;&lt;/li&gt; &lt;/ul&gt;</code></p>
 </blockquote>
 
-<h6>
-<a name="render-object-arrays-into-array-of-objects" class="anchor" href="#render-object-arrays-into-array-of-objects"><span class="octicon octicon-link"></span></a>Render object arrays into array of objects:</h6>
+<h4>
+<a name="render-object-arrays-into-array-of-objects" class="anchor" href="#render-object-arrays-into-array-of-objects"><span class="octicon octicon-link"></span></a>Render object arrays into array of objects:</h4>
 
 <pre><code>source = "&lt;ul&gt;{loop people}&lt;li&gt;{name}, {age} {loop activities}&lt;span&gt;{sport} and {hobby}&lt;/span&gt;{end activities}&lt;/li&gt;{end people}&lt;/ul&gt;";
 
@@ -180,8 +180,8 @@ console.log(Bigot.render(source, data));
 <p>output: <code>&lt;ul&gt; &lt;li&gt;Abby, 24 &lt;span&gt;hockey and drive&lt;/span&gt;&lt;/li&gt; &lt;li&gt;Matt, 32 &lt;span&gt;football and pets&lt;/span&gt;&lt;/li&gt; &lt;li&gt;John, 18 &lt;span&gt;tennis and videogames&lt;/span&gt;&lt;/li&gt; &lt;/ul&gt;</code></p>
 </blockquote>
 
-<h6>
-<a name="render-conditionals" class="anchor" href="#render-conditionals"><span class="octicon octicon-link"></span></a>Render conditionals:</h6>
+<h4>
+<a name="render-conditionals" class="anchor" href="#render-conditionals"><span class="octicon octicon-link"></span></a>Render conditionals:</h4>
 
 <pre><code>source = "{if showMe}&lt;p&gt;Hello {if canShow}&lt;span&gt;friend!&lt;/span&gt;{else}&lt;span&gt;{name}!&lt;/span&gt;{end canShow}&lt;/p&gt;{else}&lt;p&gt;Bye!&lt;/p&gt;{end showMe}";
 
@@ -196,8 +196,8 @@ console.log(Bigot.render(source, data));
 <p>output: <code>&lt;p&gt;Hello &lt;span&gt;Lightning McQueen!&lt;/span&gt;&lt;/p&gt;</code></p>
 </blockquote>
 
-<h6>
-<a name="comments-with-bigot" class="anchor" href="#comments-with-bigot"><span class="octicon octicon-link"></span></a>Comments with Bigot:</h6>
+<h4>
+<a name="comments-with-bigot" class="anchor" href="#comments-with-bigot"><span class="octicon octicon-link"></span></a>Comments with Bigot:</h4>
 
 <pre><code>source = "{comment Start of file}&lt;h1&gt;{title}&lt;/h1&gt;&lt;h6&gt;{subtitle}&lt;/h6&gt;{comment Middle of file}&lt;p&gt;{content}&lt;/p&gt;&lt;p&gt;2 + 3 = {func}&lt;/p&gt;{comment End of file}";
 
@@ -210,8 +210,8 @@ console.log(Bigot.render(source, data));
 <p>output: <code>&lt;h1&gt;Hello World!&lt;/h1&gt;&lt;h6&gt;and hello Bigot!&lt;/h6&gt;&lt;p&gt;This is a Bigot test template&lt;/p&gt;&lt;p&gt;2 + 3 = 5&lt;/p&gt;</code></p>
 </blockquote>
 
-<h6>
-<a name="helpers-with-bigot" class="anchor" href="#helpers-with-bigot"><span class="octicon octicon-link"></span></a>Helpers with Bigot:</h6>
+<h4>
+<a name="helpers-with-bigot" class="anchor" href="#helpers-with-bigot"><span class="octicon octicon-link"></span></a>Helpers with Bigot:</h4>
 
 <pre><code>source = "&lt;h1&gt;{toUpper title}&lt;/h1&gt;&lt;h6&gt;{toLower subtitle}&lt;/h6&gt;";
 
@@ -236,8 +236,8 @@ console.log(Bigot.render(source, data));
 <p>output: <code>&lt;h1&gt;HELLO WORLD!&lt;/h1&gt;&lt;h6&gt;and hello bigot!&lt;/h6&gt;</code></p>
 </blockquote>
 
-<h6>
-<a name="more-samples-see-testtestcoffee" class="anchor" href="#more-samples-see-testtestcoffee"><span class="octicon octicon-link"></span></a>More samples? See test/test.coffee</h6>
+<h4>
+<a name="more-samples-see-testtestcoffee" class="anchor" href="#more-samples-see-testtestcoffee"><span class="octicon octicon-link"></span></a>More samples? See test/test.coffee</h4>
 
 <h2>
 <a name="test" class="anchor" href="#test"><span class="octicon octicon-link"></span></a>Test</h2>
