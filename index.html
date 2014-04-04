@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset='utf-8'>
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <link href='https://fonts.googleapis.com/css?family=Architects+Daughter' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" type="text/css" href="stylesheets/stylesheet.css" media="screen" />
+    <link rel="stylesheet" type="text/css" href="stylesheets/pygment_trac.css" media="screen" />
+    <link rel="stylesheet" type="text/css" href="stylesheets/print.css" media="print" />
+
+    <!--[if lt IE 9]>
+    <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+
+    <title>Bigot by FireZenk</title>
+  </head>
+
+  <body>
+    <header>
+      <div class="inner">
+        <h1>Bigot</h1>
+        <h2>A little &#39;moustache inspired&#39; template engine but more semantic</h2>
+        <a href="https://github.com/FireZenk/bigot" class="button"><small>View project on</small>GitHub</a>
+      </div>
+    </header>
+
+    <div id="content-wrapper">
+      <div class="inner clearfix">
+        <section id="main-content">
+          <p><a href="http://badge.fury.io/js/bigot"><img src="https://badge.fury.io/js/bigot.png" alt="NPM version"></a> <a href="http://badge.fury.io/bo/bigot"><img src="https://badge.fury.io/bo/bigot.png" alt="Bower version"></a> <a href="http://badge.fury.io/gh/FireZenk%2Fbigot"><img src="https://badge.fury.io/gh/FireZenk%2Fbigot.png" alt="GitHub version"></a> <a href="https://travis-ci.org/FireZenk/bigot"><img src="https://travis-ci.org/FireZenk/bigot.png?branch=master" alt="Build Status"></a></p>
+
+<h1>
+<a name="bigot" class="anchor" href="#bigot"><span class="octicon octicon-link"></span></a>Bigot</h1>
+
+<p>A little <em>moustache inspired</em> template engine but more semantic.
+Bigot is easy to learn, read and write.</p>
+
+<h2>
+<a name="how-to-install" class="anchor" href="#how-to-install"><span class="octicon octicon-link"></span></a>How to install</h2>
+
+<p>As Node module</p>
+
+<pre><code>npm install bigot --save
+</code></pre>
+
+<p>As Bower component</p>
+
+<pre><code>bower install bigot
+</code></pre>
+
+<p>Or as Grunt plugin</p>
+
+<pre><code>npm install grunt-contrib-bigot --save-dev
+</code></pre>
+
+<h2>
+<a name="how-to-use" class="anchor" href="#how-to-use"><span class="octicon octicon-link"></span></a>How to use</h2>
+
+<h6>
+<a name="reserved-keywords" class="anchor" href="#reserved-keywords"><span class="octicon octicon-link"></span></a>Reserved keywords:</h6>
+
+<p>In order to be an engine of more semantic templates, Bigot use certain words to describe his actions, which shall therefore be reserved and may not be used as names or properties of objects/arrays.</p>
+
+<p>This is the list of reserved keywords:</p>
+
+<ul>
+<li>include</li>
+<li>comment</li>
+<li>if</li>
+<li>else</li>
+<li>loop</li>
+<li>end</li>
+<li>@</li>
+</ul><h6>
+<a name="include-bigot" class="anchor" href="#include-bigot"><span class="octicon octicon-link"></span></a>Include Bigot:</h6>
+
+<pre><code>Bigot = require("node_modules/bigot/lib/index.js");
+</code></pre>
+
+<hr><h6>
+<a name="render-objects" class="anchor" href="#render-objects"><span class="octicon octicon-link"></span></a>Render objects:</h6>
+
+<pre><code>source = "&lt;h1&gt;{title}&lt;/h1&gt;&lt;h6&gt;{subtitle}&lt;/h6&gt;&lt;p&gt;{content}&lt;/p&gt;&lt;p&gt;2 + 3 = {func}&lt;/p&gt;";
+
+data = {title: "Hello World!", subtitle: "and hello Bigot!",
+            content: "This is a Bigot test template", func: function() {return 2+3}};
+
+console.log(Bigot.render(source, data));
+
+</code></pre>
+
+<blockquote>
+<p>output: <code>&lt;h1&gt;Hello World!&lt;/h1&gt;&lt;h6&gt;and hello Bigot!&lt;/h6&gt;&lt;p&gt;This is a Bigot test template&lt;/p&gt;&lt;p&gt;2 + 3 = 5&lt;/p&gt;</code></p>
+</blockquote>
+
+<h6>
+<a name="render-including-templates" class="anchor" href="#render-including-templates"><span class="octicon octicon-link"></span></a>Render including templates:</h6>
+
+<pre><code>source = "{include header}&lt;h1&gt;{title}&lt;/h1&gt;&lt;h6&gt;{subtitle}&lt;/h6&gt;&lt;p&gt;{content}&lt;/p&gt;&lt;p&gt;2 + 3 = {func}&lt;/p&gt;{include footer}";
+
+data = {header: "./test/header.html", footer: "./test/footer.html", title: "Hello World!",
+    subtitle: "and hello Bigot!", content: "This is a Bigot test template", func: function() {return 2 + 3;}};
+
+console.log(Bigot.render(source, data));
+
+</code></pre>
+
+<blockquote>
+<p>output: <code>&lt;html&gt;&lt;head&gt;&lt;title&gt;Bigot test&lt;/title&gt;&lt;/head&gt;&lt;body&gt;&lt;h1&gt;Hello World!&lt;/h1&gt;&lt;h6&gt;and hello Bigot!&lt;/h6&gt;&lt;p&gt;This is a Bigot test template&lt;/p&gt;&lt;p&gt;2 + 3 = 5&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</code></p>
+</blockquote>
+
+<h6>
+<a name="render-arrays" class="anchor" href="#render-arrays"><span class="octicon octicon-link"></span></a>Render arrays:</h6>
+
+<pre><code>source = "&lt;ul&gt;{loop names}&lt;li&gt;{@}&lt;/li&gt;{end names}&lt;/ul&gt;";
+
+data = {names: ["Abby","Matt","Jhon"]};
+
+console.log(Bigot.render(source, data));
+</code></pre>
+
+<blockquote>
+<p>output: <code>&lt;ul&gt; &lt;li&gt;Abby&lt;/li&gt; &lt;li&gt;Matt&lt;/li&gt; &lt;li&gt;Jhon&lt;/li&gt; &lt;/ul&gt;</code></p>
+</blockquote>
+
+<h6>
+<a name="render-array-of-objects" class="anchor" href="#render-array-of-objects"><span class="octicon octicon-link"></span></a>Render array of objects:</h6>
+
+<pre><code>source = "&lt;ul&gt;{loop people}&lt;li&gt;{name}, {age}&lt;/li&gt;{end people}&lt;/ul&gt;";
+
+data = {people: [{name: "Abby", age: "24"},
+                {name: "Matt", age: "32"},
+                {name: "John", age: "18"}]};
+
+console.log(Bigot.render(source, data));
+</code></pre>
+
+<blockquote>
+<p>output: <code>&lt;ul&gt; &lt;li&gt;Abby, 24&lt;/li&gt; &lt;li&gt;Matt, 32&lt;/li&gt; &lt;li&gt;John, 18&lt;/li&gt; &lt;/ul&gt;</code></p>
+</blockquote>
+
+<h6>
+<a name="render-arrays-into-array-of-objects" class="anchor" href="#render-arrays-into-array-of-objects"><span class="octicon octicon-link"></span></a>Render arrays into array of objects:</h6>
+
+<pre><code>source = "&lt;ul&gt;{loop people}&lt;li&gt;{name}, {age} {loop sports}&lt;span&gt;{@}&lt;/span&gt;{end sports}&lt;/li&gt;{end people}&lt;/ul&gt;";
+
+data = {people: [{name: "Abby", age: "24", sports: ["hockey","curling"]},
+                 {name: "Matt", age: "32", sports: ["futbol"]},
+                 {name: "John", age: "18", sports: ["tennis","basketball"]}
+                ]};
+
+console.log(Bigot.render(source, data));
+</code></pre>
+
+<blockquote>
+<p>output: <code>&lt;ul&gt; &lt;li&gt;Abby, 24 &lt;span&gt;hockey&lt;/span&gt;&lt;span&gt;curling&lt;/span&gt;&lt;/li&gt; &lt;li&gt;Matt, 32 &lt;span&gt;futbol&lt;/span&gt;&lt;/li&gt; &lt;li&gt;John, 18 &lt;span&gt;tennis&lt;/span&gt;&lt;span&gt;basketball&lt;/span&gt;&lt;/li&gt; &lt;/ul&gt;</code></p>
+</blockquote>
+
+<h6>
+<a name="render-object-arrays-into-array-of-objects" class="anchor" href="#render-object-arrays-into-array-of-objects"><span class="octicon octicon-link"></span></a>Render object arrays into array of objects:</h6>
+
+<pre><code>source = "&lt;ul&gt;{loop people}&lt;li&gt;{name}, {age} {loop activities}&lt;span&gt;{sport} and {hobby}&lt;/span&gt;{end activities}&lt;/li&gt;{end people}&lt;/ul&gt;";
+
+data = {people: [{name: "Abby", age: "24", activities: [{
+                                            sport: "hockey",
+                                            hobby: "drive"}] },
+                 {name: "Matt", age: "32", activities: [{
+                                            sport: "football",
+                                            hobby: "pets"}] },
+                 {name: "John", age: "18", activities: [{
+                                            sport: "tennis",
+                                            hobby: "videogames"}] }
+                ]};
+
+console.log(Bigot.render(source, data));
+</code></pre>
+
+<blockquote>
+<p>output: <code>&lt;ul&gt; &lt;li&gt;Abby, 24 &lt;span&gt;hockey and drive&lt;/span&gt;&lt;/li&gt; &lt;li&gt;Matt, 32 &lt;span&gt;football and pets&lt;/span&gt;&lt;/li&gt; &lt;li&gt;John, 18 &lt;span&gt;tennis and videogames&lt;/span&gt;&lt;/li&gt; &lt;/ul&gt;</code></p>
+</blockquote>
+
+<h6>
+<a name="render-conditionals" class="anchor" href="#render-conditionals"><span class="octicon octicon-link"></span></a>Render conditionals:</h6>
+
+<pre><code>source = "{if showMe}&lt;p&gt;Hello {if canShow}&lt;span&gt;friend!&lt;/span&gt;{else}&lt;span&gt;{name}!&lt;/span&gt;{end canShow}&lt;/p&gt;{else}&lt;p&gt;Bye!&lt;/p&gt;{end showMe}";
+
+data = {name: "Lightning McQueen",
+        showMe: function() {return true},
+        canShow: function() {return false}};
+
+console.log(Bigot.render(source, data));
+</code></pre>
+
+<blockquote>
+<p>output: <code>&lt;p&gt;Hello &lt;span&gt;Lightning McQueen!&lt;/span&gt;&lt;/p&gt;</code></p>
+</blockquote>
+
+<h6>
+<a name="comments-with-bigot" class="anchor" href="#comments-with-bigot"><span class="octicon octicon-link"></span></a>Comments with Bigot:</h6>
+
+<pre><code>source = "{comment Start of file}&lt;h1&gt;{title}&lt;/h1&gt;&lt;h6&gt;{subtitle}&lt;/h6&gt;{comment Middle of file}&lt;p&gt;{content}&lt;/p&gt;&lt;p&gt;2 + 3 = {func}&lt;/p&gt;{comment End of file}";
+
+data = {title: "Hello World!", subtitle: "and hello Bigot!", content: "This is a Bigot test template", func: function() {return 2 + 3;}}
+
+console.log(Bigot.render(source, data));
+</code></pre>
+
+<blockquote>
+<p>output: <code>&lt;h1&gt;Hello World!&lt;/h1&gt;&lt;h6&gt;and hello Bigot!&lt;/h6&gt;&lt;p&gt;This is a Bigot test template&lt;/p&gt;&lt;p&gt;2 + 3 = 5&lt;/p&gt;</code></p>
+</blockquote>
+
+<h6>
+<a name="helpers-with-bigot" class="anchor" href="#helpers-with-bigot"><span class="octicon octicon-link"></span></a>Helpers with Bigot:</h6>
+
+<pre><code>source = "&lt;h1&gt;{toUpper title}&lt;/h1&gt;&lt;h6&gt;{toLower subtitle}&lt;/h6&gt;";
+
+data = {
+      title: "Hello World!",
+      subtitle: "and hello Bigot!",
+      toUpper: function(text) {
+        text = JSON.stringify(this);
+        text = text.substring(1, text.length-1);
+        return text.toUpperCase();
+      },
+      toLower: function(text) {
+        text = JSON.stringify(this);
+        text = text.substring(1, text.length-1);
+        return text.toLowerCase();
+      }  };      
+
+console.log(Bigot.render(source, data));
+</code></pre>
+
+<blockquote>
+<p>output: <code>&lt;h1&gt;HELLO WORLD!&lt;/h1&gt;&lt;h6&gt;and hello bigot!&lt;/h6&gt;</code></p>
+</blockquote>
+
+<h6>
+<a name="more-samples-see-testtestcoffee" class="anchor" href="#more-samples-see-testtestcoffee"><span class="octicon octicon-link"></span></a>More samples? See test/test.coffee</h6>
+
+<h2>
+<a name="test" class="anchor" href="#test"><span class="octicon octicon-link"></span></a>Test</h2>
+
+<p><code>nodeunit test</code></p>
+
+<h2>
+<a name="author" class="anchor" href="#author"><span class="octicon octicon-link"></span></a>Author</h2>
+
+<p><strong>Jorge Garrido Oval</strong></p>
+
+<ul>
+<li><a href="https://github.com/FireZenk">https://github.com/FireZenk</a></li>
+</ul><h2>
+<a name="license" class="anchor" href="#license"><span class="octicon octicon-link"></span></a>License</h2>
+
+<p>Bigot is released under the MIT license.</p>
+        </section>
+
+        <aside id="sidebar">
+          <a href="https://github.com/FireZenk/bigot/zipball/master" class="button">
+            <small>Download</small>
+            .zip file
+          </a>
+          <a href="https://github.com/FireZenk/bigot/tarball/master" class="button">
+            <small>Download</small>
+            .tar.gz file
+          </a>
+
+          <p class="repo-owner"><a href="https://github.com/FireZenk/bigot"></a> is maintained by <a href="https://github.com/FireZenk">FireZenk</a>.</p>
+
+          <p>This page was generated by <a href="https://pages.github.com">GitHub Pages</a> using the Architect theme by <a href="https://twitter.com/jasonlong">Jason Long</a>.</p>
+        </aside>
+      </div>
+    </div>
+
+  
+  </body>
+</html>
